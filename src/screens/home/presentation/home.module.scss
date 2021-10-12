@@ -1,15 +1,24 @@
 
 body {
-    background: rgb(61, 176, 250);
+  background: rgb(61, 176, 250);
 }
 
-.pokeTestLogoContainer {
-    align-items: center;
-    display: flex;
-    justify-content: center;
+.logoContainer {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  margin-top: 50px;
 
-    img {
-        height: 120px;
-        width: 400px;
-    }
+  img {
+    height: 120px;
+    width: 400px;
+  }
+
+}
+
+.inputContainer {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  margin: 50px;
 }
