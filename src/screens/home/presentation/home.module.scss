@@ -3,22 +3,35 @@ body {
   background: rgb(61, 176, 250);
 }
 
-.logoContainer {
+.homeContainer {
   align-items: center;
   display: flex;
   justify-content: center;
-  margin-top: 50px;
+  flex-direction: column;
 
-  img {
-    height: 120px;
-    width: 400px;
+  .logoContainer {
+    margin-top: 50px;
+
+    img {
+      height: 120px;
+      width: 400px;
+    }
+
+  }
+
+  .inputContainer {
+    margin: 50px;
+
+    input {
+      border-radius: 5px;
+      border-color: rgb(69, 107, 180);
+      height: 25px;
+      width: 250px;
+      font-size: 18px;
+      padding: 5px;
+    }
   }
 
 }
 
-.inputContainer {
-  align-items: center;
-  display: flex;
-  justify-content: center;
-  margin: 50px;
-}
+
