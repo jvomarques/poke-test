@@ -8,6 +8,8 @@ body {
   display: flex;
   justify-content: center;
   flex-direction: column;
+  color: white;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 
   .logoContainer {
     margin-top: 50px;
@@ -16,6 +18,7 @@ body {
       height: 120px;
       width: 400px;
     }
+
 
   }
 

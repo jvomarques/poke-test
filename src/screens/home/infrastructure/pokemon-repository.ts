@@ -8,6 +8,7 @@ class PokemonRepository {
     const pokemon: Pokemon = {
       name: pokemonObject.name,
       image: pokemonObject.sprites.other.dream_world.front_default,
+      type: pokemonObject.types[0].type.name,
     }
     return Promise.resolve(pokemon)
   }

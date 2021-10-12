@@ -7,10 +7,12 @@ import Pokemon from '../domain/entities/pokemon'
 
 const pokemonRepository = new PokemonRepository()
 const POKEMON_NAME_DEFAULT = 'pikachu'
+const POKEMON_TYPE_DEFAULT = 'eletric'
 const POKEMON_IMAGE_DEFAULT = 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/25.svg'
 const POKEMON_DEFAULT: Pokemon = {
   name: POKEMON_NAME_DEFAULT,
   image: POKEMON_IMAGE_DEFAULT,
+  type: POKEMON_TYPE_DEFAULT,
 }
 
 function Home(): ReactElement {
@@ -50,6 +52,11 @@ function Home(): ReactElement {
       </form>
 
       <img src={pokemon.image} aria-label={ariaLabelPokemonName} />
+      <p>
+        Type:
+        {' '}
+        {pokemon.type}
+      </p>
     </div>
   )
 }

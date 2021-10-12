@@ -4,11 +4,13 @@ import PokemonRepository from '../../infrastructure/pokemon-repository'
 
 import Home from '../home.screen'
 
-const POKEMON_NAME_DEFAULT = 'charmander'
+const POKEMON_NAME_DEFAULT = 'pikachu'
+const POKEMON_TYPE_DEFAULT = 'eletric'
 const POKEMON_IMAGE_DEFAULT = 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/25.svg'
 const POKEMON_DEFAULT: Pokemon = {
   name: POKEMON_NAME_DEFAULT,
   image: POKEMON_IMAGE_DEFAULT,
+  type: POKEMON_TYPE_DEFAULT,
 }
 
 describe('<Home />', () => {
@@ -31,31 +33,35 @@ describe('<Home />', () => {
       const pokemonImage = screen.getByRole('img', { name: 'pikachu pokemon image' })
       expect(pokemonImage).toBeInTheDocument()
     })
+
+    it('renders the pikachu type as default', () => {
+      const pokemonType = screen.getByText(/eletric/i)
+      expect(pokemonType).toBeInTheDocument()
+    })
   })
 
   describe('when any pokemon is searched', () => {
     it('renders the pokemon image correctly from a text input', async () => {
       const pokemonNameMock = 'charmander'
-      jest.spyOn(PokemonRepository.prototype, 'getByName').mockResolvedValue({ name: pokemonNameMock, image: 'url-test' })
+      jest.spyOn(PokemonRepository.prototype, 'getByName').mockResolvedValue({ name: pokemonNameMock, image: 'url-test', type: 'test' })
 
       const searchPokemonInput = screen.getByPlaceholderText('Type a pokemon name')
-      fireEvent.change(searchPokemonInput, {target: {value: pokemonNameMock}})
+      fireEvent.change(searchPokemonInput, { target: { value: pokemonNameMock } })
       fireEvent.submit(searchPokemonInput)
 
       const pokemonImage = await screen.findByRole('img', { name: `${pokemonNameMock} pokemon image` })
       expect(pokemonImage).toBeInTheDocument()
     })
 
-    it('renders the pikachu pokemon image if a text input wrong is typed', async () => {
+    it('renders the pikachu pokemon image if a text input is empty', async () => {
       jest.spyOn(PokemonRepository.prototype, 'getByName').mockResolvedValue(POKEMON_DEFAULT)
-      const pokemonNameMock = '29192891 pokemon test'
+      const pokemonNameMock = ''
       const searchPokemonInput = screen.getByPlaceholderText('Type a pokemon name')
-      fireEvent.change(searchPokemonInput, {target: {value: pokemonNameMock}})
+      fireEvent.change(searchPokemonInput, { target: { value: pokemonNameMock } })
       fireEvent.submit(searchPokemonInput)
 
       const pokemonImage = await screen.findByRole('img', { name: 'pikachu pokemon image' })
       expect(pokemonImage).toBeInTheDocument()
     })
-
   })
 })
