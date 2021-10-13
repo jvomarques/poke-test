@@ -4,30 +4,21 @@ import pokeTestLogo from './assets/images/pokeTestLogo.png'
 import style from './home.module.scss'
 import PokemonRepository from '../infrastructure/pokemon-repository'
 import Pokemon from '../domain/entities/pokemon'
+import PokemonComponent from './components/pokemon.component'
 
 const pokemonRepository = new PokemonRepository()
-const POKEMON_NAME_DEFAULT = 'pikachu'
-const POKEMON_TYPE_DEFAULT = 'eletric'
-const POKEMON_IMAGE_DEFAULT = 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/25.svg'
-const POKEMON_DEFAULT: Pokemon = {
-  name: POKEMON_NAME_DEFAULT,
-  image: POKEMON_IMAGE_DEFAULT,
-  type: POKEMON_TYPE_DEFAULT,
-}
 
 function Home(): ReactElement {
   const [inputPokemonName, setInputPokemonName] = useState('')
-
-  // const pokemonImage = 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/25.svg'
-  // const [pokemonName, setPokemonName] = useState('pikachu')
-  // const ariaLabelPokemonName = `${pokemonName} pokemon image`
-
-  const [pokemon, setPokemon] = useState<Pokemon>(POKEMON_DEFAULT)
-  const ariaLabelPokemonName = `${pokemon.name} pokemon image`
+  const [pokemon, setPokemon] = useState<Pokemon | undefined>(undefined)
 
   const handleSubmitPokemonInput = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
-    setPokemon(await pokemonRepository.getByName(inputPokemonName || POKEMON_NAME_DEFAULT))
+    if (inputPokemonName) {
+      setPokemon(await pokemonRepository.getByName(inputPokemonName))
+    } else {
+      setPokemon(undefined)
+    }
   }
 
   const handleChangePokemonInput = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -51,12 +42,7 @@ function Home(): ReactElement {
         </div>
       </form>
 
-      <img src={pokemon.image} aria-label={ariaLabelPokemonName} />
-      <p>
-        Type:
-        {' '}
-        {pokemon.type}
-      </p>
+      <PokemonComponent pokemon={pokemon} />
     </div>
   )
 }
