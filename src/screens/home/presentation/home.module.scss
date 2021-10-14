@@ -4,22 +4,20 @@ body {
 }
 
 .homeContainer {
+  width: 100%;
+  height: auto;
   align-items: center;
   display: flex;
   justify-content: center;
   flex-direction: column;
-  color: black;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 
   .logoContainer {
     margin-top: 50px;
-
     img {
       height: 120px;
       width: 400px;
     }
-
-
   }
 
   .inputContainer {

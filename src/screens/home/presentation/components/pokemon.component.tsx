@@ -8,22 +8,25 @@ type PokemonComponentProps = {
   pokemon?: Pokemon
 }
 function PokemonComponent({ pokemon }: PokemonComponentProps): ReactElement {
+  const pokemonTypeStyle = (pokemonType: string) => style[`pokemonType-${pokemonType}`]
   const ariaLabelPokemonName = `${pokemon && pokemon.name} pokemon image`
 
   return (
-    <div className={style.pokemonContainer}>
+    <div>
       {pokemon ? (
-        <div>
+        <div className={style.pokemonContainer}>
           <img src={pokemon.image} aria-label={ariaLabelPokemonName} />
-          <p>
+          <h1 className={`${style.pokemonType} ${pokemonTypeStyle(pokemon.type)}`}>
             Type:
             {' '}
             {pokemon.type}
-          </p>
+          </h1>
         </div>
       )
         : (
-          <img className={style.pokemonGuessImage} src={pokemonGuessImage} aria-label="guess pokemon image" />
+          <div className={style.pokemonContainer}>
+            <img className={style.pokemonGuessImage} src={pokemonGuessImage} aria-label="guess pokemon image" />
+          </div>
         )}
 
     </div>

@@ -1,4 +1,5 @@
 import { fireEvent, render, screen } from '@testing-library/react'
+import Pokemon from 'screens/home/domain/entities/pokemon'
 import PokemonRepository from '../../infrastructure/pokemon-repository'
 
 import Home from '../home.screen'
@@ -26,28 +27,37 @@ describe('<Home />', () => {
   })
 
   describe('when any valid pokemon is searched', () => {
-    it('renders the pokemon image correctly from a text input', async () => {
-      const pokemonNameMock = 'charmander'
-      jest.spyOn(PokemonRepository.prototype, 'getByName').mockResolvedValue({ name: pokemonNameMock, image: 'url-test', type: 'test' })
-
-      const searchPokemonInput = screen.getByPlaceholderText('Type a pokemon name')
-      fireEvent.change(searchPokemonInput, { target: { value: pokemonNameMock } })
-      fireEvent.submit(searchPokemonInput)
-
-      const pokemonImage = await screen.findByRole('img', { name: `${pokemonNameMock} pokemon image` })
-      expect(pokemonImage).toBeInTheDocument()
-    })
-
     it('renders the pokemon type correctly', async () => {
-      const pokemonNameMock = 'charmander'
-      jest.spyOn(PokemonRepository.prototype, 'getByName').mockResolvedValue({ name: pokemonNameMock, image: 'url-test', type: 'test' })
+      const pokemonMock: Pokemon = {
+        name: 'pokeTestName',
+        type: 'pokeTestType',
+        image: 'pokeTestImage',
+      }
+      jest.spyOn(PokemonRepository.prototype, 'getByName').mockResolvedValue(pokemonMock)
 
       const searchPokemonInput = screen.getByPlaceholderText('Type a pokemon name')
-      fireEvent.change(searchPokemonInput, { target: { value: pokemonNameMock } })
+      fireEvent.change(searchPokemonInput, { target: { value: pokemonMock.name } })
       fireEvent.submit(searchPokemonInput)
 
       const pokemonType = await screen.findByText(/test/i)
       expect(pokemonType).toBeInTheDocument()
+    })
+
+    it('renders the pokemon image correctly from a text input', async () => {
+      const pokemonMock: Pokemon = {
+        name: 'pokeTestName',
+        type: 'pokeTestType',
+        image: 'pokeTestImage',
+      }
+
+      jest.spyOn(PokemonRepository.prototype, 'getByName').mockResolvedValue(pokemonMock)
+
+      const searchPokemonInput = screen.getByPlaceholderText('Type a pokemon name')
+      fireEvent.change(searchPokemonInput, { target: { value: pokemonMock.name } })
+      fireEvent.submit(searchPokemonInput)
+
+      const pokemonImage = await screen.findByRole('img', { name: `${pokemonMock.name} pokemon image` })
+      expect(pokemonImage).toBeInTheDocument()
     })
   })
 
