@@ -1,4 +1,4 @@
-import calculateDefense from '../usecases/pokemon-defense-usecase'
+import { calculateDefense } from '../usecases/pokemon-defense-usecase'
 
 describe('PokemonDefenseUseCase', () => {
   describe('when defense is calculated', () => {

@@ -1,8 +1,8 @@
 import { ReactElement, useMemo } from 'react'
 
 import Pokemon from '../../domain/entities/pokemon'
-import calculateAttack from '../../domain/usecases/pokemon-attack-usecase'
-import calculateDefense from '../../domain/usecases/pokemon-defense-usecase'
+import { calculateAttack } from '../../domain/usecases/pokemon-attack-usecase'
+import { calculateDefense } from '../../domain/usecases/pokemon-defense-usecase'
 
 import style from './pokemon.module.scss'
 import pokemonGuessImage from '../assets/images/pokemonGuess.png'
@@ -30,12 +30,12 @@ function PokemonComponent({ pokemon }: PokemonComponentProps): ReactElement {
           <span>
             Attack:
             {' '}
-            {attack}
+            <span data-testid="attack-value">{attack}</span>
           </span>
           <span>
             Defense:
             {' '}
-            {defense}
+            <span data-testid="defense-value">{defense}</span>
           </span>
         </div>
       )
