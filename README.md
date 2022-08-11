@@ -20,4 +20,8 @@ This is a Pokédex test projetc in react created in order to study concepts abou
 **WHEN** it attack level is bigger than 750 <br/>
 **THEN** the defense level it will be 10% of attack level <br/>
 
+4. **GIVEN** that any pokemon is searched <br/>
+**WHEN** the information request is finished <br/>
+**THEN** the weight information will be displayed <br/>
+
 ![PokeTest](pokeTestHome.png "PokeTest")
